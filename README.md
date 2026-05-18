@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<p align="center">
+  <strong>kankam.ai</strong> &mdash; <em>kanka'nın resmi tanıtım sitesi</em>
+</p>
 
-## Getting Started
+<p align="center">
+  <a href="https://kankam.ai"><img alt="site" src="https://img.shields.io/badge/site-kankam.ai-94e2d5?style=flat-square"></a>
+  <a href="LICENSE"><img alt="license" src="https://img.shields.io/badge/license-MIT-blue?style=flat-square"></a>
+  <img alt="next" src="https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js">
+  <img alt="tailwind" src="https://img.shields.io/badge/Tailwind-4-06b6d4?style=flat-square&logo=tailwindcss">
+</p>
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Nedir?
+
+[kanka](https://github.com/thorrangonak/kanka) — Türkçe konuşan terminal kodlama asistanı — için resmi tanıtım sitesi. **kankam.ai** adresinde yayınlanır.
+
+## Teknoloji
+
+| Katman | Seçim |
+|--------|-------|
+| Framework | **Next.js 16** (App Router, Turbopack) |
+| Dil | TypeScript strict |
+| Stil | **Tailwind CSS 4** + custom Catppuccin Mocha tema |
+| Tema | `next-themes` (light/dark, dark default) |
+| Animasyon | `framer-motion` |
+| Icons | `lucide-react` + custom brand SVG'leri |
+| i18n | TR ana, EN secondary (`/en`) |
+| Build | Statik export (`output: "export"`) |
+| Hosting | DigitalOcean droplet + Nginx |
+| Deploy | GitHub Actions → SSH rsync |
+| Analytics | (planlı) Plausible self-hosted |
+
+## Yapı
+
+```
+src/
+├── app/
+│   ├── layout.tsx          # Root layout + metadata
+│   ├── page.tsx            # Ana landing
+│   ├── globals.css         # Catppuccin Mocha + utilities
+│   ├── robots.ts           # robots.txt
+│   ├── sitemap.ts          # sitemap.xml
+│   └── opengraph-image.tsx # 1200×630 OG (build-time)
+├── components/
+│   ├── navbar.tsx
+│   ├── footer.tsx
+│   ├── theme-provider.tsx
+│   ├── theme-toggle.tsx
+│   ├── copy-command.tsx
+│   ├── feature-card.tsx
+│   └── icons.tsx
+└── lib/
+    ├── features.ts         # 8 özellik tek source of truth
+    └── utils.ts            # cn() helper
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Geliştirme
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Bağımlılıklar
+npm install
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Dev server (Turbopack)
+npm run dev
+# → http://localhost:3000
 
-## Learn More
+# Production build (statik export)
+npm run build
+# → out/ klasörü, Nginx'te serve edilebilir
 
-To learn more about Next.js, take a look at the following resources:
+# Lokal preview
+npx serve out
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploy
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Otomatik**: `main`'e push → GitHub Actions → DigitalOcean rsync.
 
-## Deploy on Vercel
+**Manuel**: `npm run build && rsync -avz --delete out/ deploy@host:/var/www/kankam.ai/`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Detay: [DEPLOYMENT.md](DEPLOYMENT.md)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## GitHub Actions secrets
+
+| Secret | Açıklama |
+|--------|----------|
+| `DO_HOST` | DigitalOcean droplet IP veya hostname |
+| `DO_USER` | SSH kullanıcı (önerilen: `deploy`) |
+| `DO_PORT` | SSH portu (varsayılan 22) |
+| `DO_PATH` | Site path (`/var/www/kankam.ai`) |
+| `DO_SSH_KEY` | Private key (`-----BEGIN OPENSSH PRIVATE KEY-----` dahil) |
+
+## Lisans
+
+[MIT](LICENSE) © thorrangonak
+
+## İlgili linkler
+
+- 🚀 [kanka GitHub](https://github.com/thorrangonak/kanka) — ana ürün
+- 📦 [@thorrangonak/kanka npm](https://www.npmjs.com/package/@thorrangonak/kanka)
+- 📋 [kanka ROADMAP](https://github.com/thorrangonak/kanka/blob/main/ROADMAP.md)
+- 🤝 [Katkı rehberi](https://github.com/thorrangonak/kanka/blob/main/CONTRIBUTING.md)
