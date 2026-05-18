@@ -155,7 +155,8 @@ body { overflow-x: hidden; }
 .win-body { padding: 18px 20px; font-family: var(--font-mono); font-size: 14px; line-height: 1.65; color: var(--text); }
 
 /* === Sections === */
-section { padding: 96px 0; position: relative; }
+section { padding: 96px 0; position: relative; scroll-margin-top: 20px; }
+section[id] { scroll-margin-top: 20px; }
 section.tight { padding: 56px 0; }
 section.hero { padding: 0; }
 
@@ -609,4 +610,260 @@ pre.code {
 @keyframes fadein {
   from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: none; }
+}
+
+/* ============================================================
+   RESPONSIVE OVERRIDES — Inline grid'leri override eder
+   Mobile-first değil ama tasarımın orijinal davranışını korur
+   ============================================================ */
+
+/* Tablet (961-1100px) — 4'lü grid'ler 2'li olur */
+@media (max-width: 1100px) {
+  /* Features grid */
+  #features .grid-4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* Mobile + küçük tablet (max 960px) */
+@media (max-width: 960px) {
+  /* Hero — yan yana yerine alt alta */
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  .hero h1 {
+    font-size: clamp(40px, 9vw, 56px) !important;
+  }
+
+  /* Persona demo */
+  #persona-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
+  /* KVKK */
+  #kvkk-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  /* Token savings */
+  #tk-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  .bar-row {
+    grid-template-columns: 110px 1fr 70px !important;
+    gap: 10px !important;
+  }
+
+  /* Provider grid + giriş/env */
+  #providers .grid-5 {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+  #prov-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  /* Quickstart */
+  #qs-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Community */
+  #comm-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  /* Footer */
+  .footer-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 28px !important;
+  }
+  .footer-grid > div:first-child {
+    grid-column: span 2;
+  }
+
+  /* Detay sayfası — comparison + table */
+  .comparison-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  /* Detail sayfası heading'leri biraz daha küçük */
+  main h1 {
+    font-size: clamp(32px, 7vw, 48px) !important;
+  }
+
+  /* Persona pills daha sıkı */
+  .persona-pill {
+    padding: 7px 12px !important;
+    font-size: 13px !important;
+  }
+
+  /* Section padding azalt */
+  section {
+    padding: 56px 0 !important;
+  }
+
+  /* Container daha sıkı padding */
+  .container {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+
+/* Tam mobile (max 720px) */
+@media (max-width: 720px) {
+  /* Provider grid daha sıkı */
+  #providers .grid-5 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Hero butonları full width */
+  .hero .copy-row,
+  .hero .btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* Navbar — gh-badge zaten gizli, sadece logo + tema + indir */
+  .nav-inner {
+    padding: 12px 16px !important;
+    gap: 8px !important;
+  }
+  .nav-right {
+    gap: 6px !important;
+  }
+  .nav-right .btn-sm {
+    padding: 8px 12px !important;
+    font-size: 13px !important;
+  }
+
+  /* Hero terminal'i biraz küçült */
+  .win-body {
+    font-size: 12px !important;
+    padding: 14px 16px !important;
+    min-height: 280px !important;
+  }
+  .win-bar {
+    padding: 8px 12px !important;
+  }
+  .win-title {
+    font-size: 11px !important;
+  }
+
+  /* Tablo'lar yatay scroll alır (zaten overflow-x var) */
+
+  /* Detail sayfası stats grid — 2 sütun */
+  main [style*="repeat("][style*="1fr"] {
+    /* Bunu spesifik bir class ile yapmak gerek, şimdilik genel */
+  }
+
+  /* Kod blokları font küçük */
+  pre.code,
+  pre code {
+    font-size: 12px !important;
+  }
+
+  /* H2 başlıklar */
+  h2 {
+    font-size: 28px !important;
+  }
+
+  /* Section head margin azalt */
+  .section-head {
+    margin-bottom: 32px !important;
+  }
+
+  /* Eyebrow */
+  .eyebrow {
+    font-size: 11px !important;
+  }
+
+  /* Detay sayfası TL;DR kutusu */
+  details {
+    padding: 14px 16px !important;
+  }
+
+  /* Footer 1 sütun */
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .footer-grid > div:first-child {
+    grid-column: span 1;
+  }
+
+  /* Sosyal kanıt strip — küçük metin */
+  .tight .container {
+    flex-direction: column !important;
+    text-align: center !important;
+  }
+  .tight .container > div {
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  /* Final CTA başlığı küçük */
+  #cta h2 {
+    font-size: clamp(32px, 8vw, 56px) !important;
+  }
+
+  /* CopyCmd — uzun komut taşmasın */
+  .copy-row {
+    flex-wrap: wrap !important;
+  }
+  .copy-row .cmd {
+    font-size: 12px !important;
+    overflow-x: auto !important;
+    word-break: break-all !important;
+  }
+
+  /* Detail sayfası stat-grid — mobile'da 2 sütun */
+  .stat-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .stat-grid > div {
+    padding: 14px !important;
+  }
+  .stat-grid div[style*="fontSize: 32"] {
+    font-size: 24px !important;
+  }
+}
+
+/* Çok küçük (max 480px) — telefon portrait */
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 36px !important;
+    line-height: 1.1 !important;
+  }
+  h2 {
+    font-size: 24px !important;
+  }
+  .container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  section {
+    padding: 48px 0 !important;
+  }
+  .card {
+    padding: 18px !important;
+  }
+  .step {
+    padding: 18px !important;
+  }
+}
+
+/* Print friendly (opsiyonel) */
+@media print {
+  .nav, footer, .hero-bg, .dot-grid {
+    display: none !important;
+  }
+  .container {
+    max-width: 100% !important;
+  }
 }

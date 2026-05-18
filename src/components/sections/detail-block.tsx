@@ -354,6 +354,7 @@ function renderKbdList(block: Extract<DetailBlock, { kind: "kbd-list" }>) {
 function renderStatGrid(block: Extract<DetailBlock, { kind: "stat-grid" }>) {
 	return (
 		<div
+			className="stat-grid"
 			style={{
 				marginTop: 24,
 				display: "grid",
@@ -399,6 +400,7 @@ function renderStatGrid(block: Extract<DetailBlock, { kind: "stat-grid" }>) {
 }
 
 function renderComparison(block: Extract<DetailBlock, { kind: "comparison" }>) {
+	/* comparison-grid class'ı ile responsive override yapılır */
 	const renderSide = (side: typeof block.left) => (
 		<div
 			style={{
