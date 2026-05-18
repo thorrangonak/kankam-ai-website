@@ -10,6 +10,7 @@ import type { ReactNode } from "react";
 // ============================================================================
 
 export interface Feature {
+	slug: string; // /ozellikler/<slug>/ detay sayfası
 	emoji: string;
 	title: string;
 	desc: string;
@@ -27,6 +28,7 @@ export interface Feature {
 
 export const FEATURES: readonly Feature[] = [
 	{
+		slug: "persona",
 		emoji: "🎭",
 		title: "Persona sistemi",
 		desc: "7 farklı kişilik — kanka, hoca, abi, patron, akademisyen, stajyer, paranoyak. Tek komutla geç.",
@@ -34,6 +36,7 @@ export const FEATURES: readonly Feature[] = [
 		previewKind: "persona-chips",
 	},
 	{
+		slug: "gunluk",
 		emoji: "📓",
 		title: "Geliştirme günlüğü",
 		desc: "Proje bazlı JSONL günlük. Etiketle, ara, geri dön. Dünkü kararını unutma.",
@@ -41,6 +44,7 @@ export const FEATURES: readonly Feature[] = [
 		previewKind: "journal",
 	},
 	{
+		slug: "terminal",
 		emoji: "🔔",
 		title: "Windows Terminal entegrasyonu",
 		desc: "Canlı tab title + toast bildirim. Arka planda çalışırken haberin olsun.",
@@ -48,6 +52,7 @@ export const FEATURES: readonly Feature[] = [
 		previewKind: "terminal-tab",
 	},
 	{
+		slug: "guncelle",
 		emoji: "🔄",
 		title: "Otomatik güncelleme",
 		desc: "Pasif npm check. Yeni sürüm gelince /güncelle ile saniyede güncel ol.",
@@ -55,6 +60,7 @@ export const FEATURES: readonly Feature[] = [
 		previewKind: "update-check",
 	},
 	{
+		slug: "ekip",
 		emoji: "🤝",
 		title: "9 Türkçe subagent",
 		desc: "kasif, planlayici, isci, gozden-geciren, mimar, hata-avcisi, test-yazari, refactorcu, docs-yazari.",
@@ -62,6 +68,7 @@ export const FEATURES: readonly Feature[] = [
 		previewKind: "subagent-chips",
 	},
 	{
+		slug: "chain",
 		emoji: "🔗",
 		title: "Chain + paralel async",
 		desc: "Pipeline kur, görevleri paralel çalıştır. 3× wall-clock kazancı bedava gelsin.",
@@ -69,6 +76,7 @@ export const FEATURES: readonly Feature[] = [
 		previewKind: "chain-pipeline",
 	},
 	{
+		slug: "token",
 		emoji: "💰",
 		title: "%70 token tasarrufu",
 		desc: "Prompt cache + izole context + paralel async. Aynı işi üçte birine yap.",
@@ -76,6 +84,7 @@ export const FEATURES: readonly Feature[] = [
 		previewKind: "token-bar",
 	},
 	{
+		slug: "multi-llm",
 		emoji: "🔌",
 		title: "10+ LLM provider",
 		desc: "Claude, GPT, Gemini, GLM, Grok, Llama, DeepSeek, Trendyol, MiniMax, Ollama. Sen seç.",

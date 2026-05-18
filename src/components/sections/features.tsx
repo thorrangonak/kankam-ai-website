@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FEATURES } from "@/lib/site-data";
 import { FeaturePreview } from "@/components/parts/feature-preview";
 
@@ -16,8 +17,8 @@ export function Features() {
 					<p>Türk dev&apos;in günlük akışına oturan 8 işlev. Yüklemeden 30 saniye sonra çalışıyor.</p>
 				</div>
 				<div className="grid grid-4 reveal" style={{ gap: 18 }}>
-					{FEATURES.map((f, i) => (
-						<article key={f.title} className="card">
+					{FEATURES.map((f) => (
+						<article key={f.slug} className="card">
 							<div className="emoji" aria-hidden>
 								{f.emoji}
 							</div>
@@ -26,9 +27,9 @@ export function Features() {
 							<div className="preview">
 								<FeaturePreview kind={f.previewKind} />
 							</div>
-							<a className="detail-link" href={`#feature-${i}`}>
+							<Link className="detail-link" href={`/ozellikler/${f.slug}/`}>
 								Detay <span>→</span>
-							</a>
+							</Link>
 						</article>
 					))}
 				</div>
