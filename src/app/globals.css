@@ -1,0 +1,194 @@
+@import "tailwindcss";
+
+/* ============================================
+   Catppuccin Mocha palette + kanka brand
+   https://catppuccin.com/palette/
+   ============================================ */
+
+:root {
+  /* Light theme — Catppuccin Latte */
+  --background: #eff1f5;          /* base */
+  --surface: #e6e9ef;             /* mantle */
+  --surface-2: #dce0e8;           /* crust */
+  --foreground: #4c4f69;          /* text */
+  --foreground-muted: #6c6f85;    /* subtext0 */
+  --foreground-subtle: #9ca0b0;   /* overlay1 */
+
+  --accent: #179299;              /* teal — kanka brand */
+  --accent-foreground: #ffffff;
+  --primary: #1e66f5;             /* blue */
+  --secondary: #8839ef;           /* mauve */
+  --warning: #df8e1d;             /* yellow */
+  --success: #40a02b;             /* green */
+  --danger: #d20f39;              /* red */
+
+  --border: rgba(0, 0, 0, 0.08);
+  --ring: rgba(23, 146, 153, 0.4);
+
+  --radius: 0.5rem;
+}
+
+.dark,
+[data-theme="dark"] {
+  /* Dark theme — Catppuccin Mocha (DEFAULT) */
+  --background: #1e1e2e;          /* base */
+  --surface: #313244;             /* surface0 */
+  --surface-2: #45475a;           /* surface1 */
+  --foreground: #cdd6f4;          /* text */
+  --foreground-muted: #a6adc8;    /* subtext1 */
+  --foreground-subtle: #7f849c;   /* overlay1 */
+
+  --accent: #94e2d5;              /* teal — kanka brand */
+  --accent-foreground: #1e1e2e;
+  --primary: #89b4fa;             /* blue */
+  --secondary: #cba6f7;           /* mauve */
+  --warning: #f9e2af;             /* yellow */
+  --success: #a6e3a1;             /* green */
+  --danger: #f38ba8;              /* red */
+
+  --border: rgba(255, 255, 255, 0.08);
+  --ring: rgba(148, 226, 213, 0.4);
+}
+
+/* Sistemde dark mode tercihi → otomatik dark (next-themes önce çalışmazsa) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --background: #1e1e2e;
+    --surface: #313244;
+    --surface-2: #45475a;
+    --foreground: #cdd6f4;
+    --foreground-muted: #a6adc8;
+    --foreground-subtle: #7f849c;
+    --accent: #94e2d5;
+    --accent-foreground: #1e1e2e;
+    --primary: #89b4fa;
+    --secondary: #cba6f7;
+    --warning: #f9e2af;
+    --success: #a6e3a1;
+    --danger: #f38ba8;
+    --border: rgba(255, 255, 255, 0.08);
+    --ring: rgba(148, 226, 213, 0.4);
+  }
+}
+
+/* Tailwind 4 theme inline mapping */
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-foreground-subtle: var(--foreground-subtle);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-warning: var(--warning);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), "JetBrains Mono", "Cascadia Code", "Fira Code", Consolas, monospace;
+}
+
+/* Base reset + global stiller */
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-feature-settings: "rlig" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+code, pre, kbd, samp {
+  font-family: var(--font-mono);
+}
+
+/* Selection — kanka accent rengi */
+::selection {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+/* Focus ring */
+*:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: var(--radius);
+}
+
+/* Scrollbar — terminal feel */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--surface-2);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--foreground-subtle);
+}
+
+/* macOS-style window dekoratif daireler */
+.window-controls {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.window-controls span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.window-controls .red { background: #ff5a54; }
+.window-controls .yellow { background: #e6bf29; }
+.window-controls .green { background: #52c12b; }
+
+/* Animasyon utilities */
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.terminal-cursor::after {
+  content: "▊";
+  animation: blink 1s steps(1) infinite;
+  color: var(--accent);
+  margin-left: 2px;
+}
+
+/* Container max width (kanka brand consistent) */
+.container-kanka {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .container-kanka {
+    padding-inline: 2rem;
+  }
+}
