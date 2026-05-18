@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
+import { RevealProvider } from "@/components/parts/reveal-provider";
 import "./globals.css";
 
 const inter = Inter({
@@ -122,6 +123,7 @@ export default function RootLayout({
 					disableTransitionOnChange
 				>
 					{children}
+					<RevealProvider />
 				</ThemeProvider>
 			</body>
 		</html>
